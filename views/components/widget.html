@@ -1,0 +1,28 @@
+{style}
+{literal}
+.contactimporter_provider_button
+{
+	margin: 3px;
+        display: inline-block;
+	cursor: pointer;
+}
+
+.contactimporter_provider_button img
+{
+    width: 45px;
+}
+{/literal}
+{/style}
+
+<center>
+    {foreach from=$btns item="b"}
+        <a href="{$b.href}" onclick="{$b.onclick}" class="{$b.class} contactimporter_provider_button">
+            <img src="{$b.iconUrl}" />
+        </a>
+    {/foreach}
+</center>
+<div style="display:none;">
+<div class="contactimporter_email_invite_cont">
+{$eicmp}
+</div>
+</div>
