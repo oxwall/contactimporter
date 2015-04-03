@@ -93,8 +93,7 @@ class CONTACTIMPORTER_CLASS_EventHandler
 		$userIds = array_merge($userIds, $inviters);
 	    }
 	}
-
-	$fService = FRIENDS_BOL_Service::getInstance();
+        
         $newId = $params['userId'];
 
 	foreach ( $userIds as $uid )
