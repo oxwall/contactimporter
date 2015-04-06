@@ -94,7 +94,6 @@ class CONTACTIMPORTER_CLASS_EventHandler
 	    }
 	}
 
-	$fService = FRIENDS_BOL_Service::getInstance();
         $newId = $params['userId'];
 
 	foreach ( $userIds as $uid )
