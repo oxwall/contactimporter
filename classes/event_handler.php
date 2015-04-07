@@ -93,7 +93,7 @@ class CONTACTIMPORTER_CLASS_EventHandler
 		$userIds = array_merge($userIds, $inviters);
 	    }
 	}
-
+        
         $newId = $params['userId'];
 
 	foreach ( $userIds as $uid )
