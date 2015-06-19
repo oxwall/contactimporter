@@ -45,8 +45,7 @@ var CI_Facebook = function(libUrl, userId, urlForInvite)
                 FB.ui({
                     method: 'send',
                     link: urlForInvite
-		    //data: {"userId": userId},
-		   // message: OW.getLanguageText('contactimporter', 'facebook_inv_message_text')
+                
                 }, function(res){
                     if ( res.to && res.to.length )
                     {
