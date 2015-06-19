@@ -1,4 +1,4 @@
-var CI_Facebook = function(libUrl, userId)
+var CI_Facebook = function(libUrl, userId, urlForInvite)
 {
 	var self = this;
 
@@ -43,9 +43,9 @@ var CI_Facebook = function(libUrl, userId)
         {
             this.requireLogin(function(r){
                 FB.ui({
-                    method: 'apprequests',
-		    data: {"userId": userId},
-		    message: OW.getLanguageText('contactimporter', 'facebook_inv_message_text')
+                    method: 'send',
+                    link: urlForInvite
+                
                 }, function(res){
                     if ( res.to && res.to.length )
                     {
