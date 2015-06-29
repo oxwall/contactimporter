@@ -75,6 +75,8 @@ OW::getEventManager()->bind('base.members_only_exceptions', 'contactimporter_add
 OW::getEventManager()->bind('base.password_protected_exceptions', 'contactimporter_add_access_exception');
 OW::getEventManager()->bind('base.splash_screen_exceptions', 'contactimporter_add_access_exception');
 
+OW::getApplication()->addHttpsHandlerAttrs('CONTACTIMPORTER_CTRL_Facebook', 'canvas');
+
 
 /*$credits = new CONTACTIMPORTER_CLASS_Credits();
 OW::getEventManager()->bind('usercredits.on_action_collect', array($credits, 'bindCreditActionsCollect'));*/
