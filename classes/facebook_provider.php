@@ -65,7 +65,7 @@ class CONTACTIMPORTER_CLASS_FacebookProvider extends CONTACTIMPORTER_CLASS_Provi
         $document->addScript($staticUrl . 'js/facebook.js');
 
         $userId = OW::getUser()->getId();
-        $fbLibUrl = 'http://connect.facebook.net/en_US/all.js';
+        $fbLibUrl = '//connect.facebook.net/en_US/all.js';
         
         $code = UTIL_String::getRandomString(20);
         BOL_UserService::getInstance()->saveUserInvitation($userId, $code);
