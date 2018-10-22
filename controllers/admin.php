@@ -47,58 +47,6 @@ class CONTACTIMPORTER_CTRL_Admin extends ADMIN_CTRL_Abstract
         $this->redirect($firstProvider['settigsUrl']);
     }
 
-    public function facebook( $params )
-    {
-        $this->addComponent('menu', new CONTACTIMPORTER_CMP_AdminTabs());
-
-        $appId = OW::getConfig()->getValue('contactimporter', 'facebook_app_id');
-        $appSecret = OW::getConfig()->getValue('contactimporter', 'facebook_app_secret');
-
-        $form = new Form('fasebook_settings');
-
-        $element = new TextField('appId');
-        $element->setLabel(OW::getLanguage()->text('contactimporter', 'facebook_app_id'));
-        $element->setRequired(true);
-        $element->setValue($appId);
-        $form->addElement($element);
-
-        $element = new TextField('appSecret');
-        $element->setLabel(OW::getLanguage()->text('contactimporter', 'facebook_app_secret'));
-        $element->setRequired(true);
-        $element->setValue($appSecret);
-        $form->addElement($element);
-
-        $element = new Submit('save');
-        $element->setValue(OW::getLanguage()->text('contactimporter', 'save_btn_label'));
-
-        $form->addElement($element);
-
-        if ( OW::getRequest()->isPost() && $form->isValid($_POST) )
-        {
-            $value = trim($form->getElement('appId')->getValue());
-            OW::getConfig()->saveConfig('contactimporter', 'facebook_app_id', $value);
-
-            $value = trim($form->getElement('appSecret')->getValue());
-            OW::getConfig()->saveConfig('contactimporter', 'facebook_app_secret', $value);
-
-            OW::getFeedback()->info(OW::getLanguage()->text('contactimporter', 'admin_settings_updated'));
-
-            $this->redirect();
-        }
-
-        $this->addForm($form);
-
-        $manualUrl = 'http://docs.oxwall.org/plugin-tuts:contact-importer#facebook';
-
-
-        if ( defined('OW_PLUGIN_XP') )
-        {
-            $manualUrl = 'http://docs.wall.fm/faq:site_configuration:contact_importer_setup#facebook_application_configuration';
-        }
-
-        $this->assign('manualUrl', $manualUrl);
-    }
-
     public function google( $params )
     {
         $this->addComponent('menu', new CONTACTIMPORTER_CMP_AdminTabs());

@@ -1,2 +1,2 @@
 # contactimporter
-Contact Importer plugin for Oxwall. Import Facebook, Google contacts
+Contact Importer plugin for Oxwall. Import Google contacts

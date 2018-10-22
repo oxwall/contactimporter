@@ -38,15 +38,15 @@ class CONTACTIMPORTER_CTRL_Google extends OW_ActionController
 {
     public function popup()
     {
-	$document = OW::getDocument();
+        $document = OW::getDocument();
         $document->getMasterPage()->setTemplate(OW::getThemeManager()->getMasterPageTemplate(OW_MasterPage::TEMPLATE_BLANK));
 
-	if ( isset($_GET['error']) )
-	{
-		$document->addOnloadScript('window.close();');
-		$this->assign('close', true);
-		return;
-	}
+        if ( isset($_GET['error']) )
+        {
+            $document->addOnloadScript('window.close();');
+            $this->assign('close', true);
+            return;
+        }
 
         //setting parameters
         $authcode= $_GET["code"];
@@ -98,8 +98,8 @@ class CONTACTIMPORTER_CTRL_Google extends OW_ActionController
         //extracting access_token from response string
         $response=  json_decode($result);
 
-	if ( empty($response->access_token) )
-	{
+        if ( empty($response->access_token) )
+        {
             $authUrl = OW::getRequest()->buildUrlQueryString('https://accounts.google.com/o/oauth2/auth', array(
                 'response_type' => 'code',
                 'client_id' => $clientId,
@@ -109,7 +109,7 @@ class CONTACTIMPORTER_CTRL_Google extends OW_ActionController
             ));
 
             UTIL_Url::redirect($authUrl);
-	}
+        }
 
         $accessToken= $response->access_token;
         //passing accesstoken to obtain contact details
@@ -122,22 +122,22 @@ class CONTACTIMPORTER_CTRL_Google extends OW_ActionController
         curl_setopt($ch,CURLOPT_HTTPGET, true);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)');
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        
+
         $jsonResponse = curl_exec($ch);
-        
+
         curl_close($ch);
-        
+
         //$jsonResponse =  file_get_contents('https://www.google.com/m8/feeds/contacts/default/full?max-results=' . $resultCount . '&oauth_token=' . $accessToken . '&alt=json');
-	$response = json_decode($jsonResponse, true);
+        $response = json_decode($jsonResponse, true);
 
-	if ( !empty($response["error"]["message"]) )
-	{
-		echo $response["error"]["message"];
-		exit;
-	}
+        if ( !empty($response["error"]["message"]) )
+        {
+            echo $response["error"]["message"];
+            exit;
+        }
 
-	$out = array();
-	$list = $response['feed']['entry'];
+        $out = array();
+        $list = $response['feed']['entry'];
 
         $defaultImage = BOL_AvatarService::getInstance()->getDefaultAvatarUrl();
 
@@ -145,7 +145,7 @@ class CONTACTIMPORTER_CTRL_Google extends OW_ActionController
         $jsArray = array();
 
         foreach ( $list as $item )
-	{
+        {
             if ( empty($item['gd$email'][0]['address']) )
             {
                 continue;
@@ -246,7 +246,7 @@ class CONTACTIMPORTER_CTRL_Google extends OW_ActionController
         }
 
         $message = OW::getLanguage()->text('contactimporter', 'google_send_success', array(
-           'count' => count($request['contacts'])
+            'count' => count($request['contacts'])
         ));
 
         exit($message);

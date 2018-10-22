@@ -35,9 +35,6 @@
  * @since 1.0
  */
 
-OW::getRouter()->addRoute(new OW_Route('contactimporter_facebook_canvas', 'contactimporter/fbcanvas', 'CONTACTIMPORTER_CTRL_Facebook', 'canvas'));
-OW::getRouter()->addRoute(new OW_Route('contactimporter_facebook_settings', 'admin/plugins/contactimporter/facebook', 'CONTACTIMPORTER_CTRL_Admin', 'facebook'));
-
 OW::getRouter()->addRoute(new OW_Route('contactimporter_google_settings', 'admin/plugins/contactimporter/google', 'CONTACTIMPORTER_CTRL_Admin', 'google'));
 
 OW::getRouter()->addRoute(new OW_Route('contactimporter_admin', 'admin/plugins/contactimporter', 'CONTACTIMPORTER_CTRL_Admin', 'admin'));
@@ -59,24 +56,12 @@ function contactimporter_add_admin_notification( BASE_CLASS_EventCollector $e )
     $language = OW::getLanguage();
     $configs = OW::getConfig()->getValues('contactimporter');
 
-    if ( empty($configs['facebook_app_id']) || empty($configs['google_client_id']) || empty($configs['google_client_secret']) || empty($configs['facebook_app_secret']) )
+    if ( empty($configs['google_client_id']) || empty($configs['google_client_secret']) )
     {
         $e->add($language->text('contactimporter', 'requires_configuration_message', array( 'settingsUrl' => OW::getRouter()->urlForRoute('contactimporter_admin') )));
     }
 }
 OW::getEventManager()->bind('admin.add_admin_notification', 'contactimporter_add_admin_notification');
-
-function contactimporter_add_access_exception( BASE_CLASS_EventCollector $e )
-{
-    $e->add(array('controller' => 'CONTACTIMPORTER_CTRL_Facebook', 'action' => 'canvas'));
-}
-
-OW::getEventManager()->bind('base.members_only_exceptions', 'contactimporter_add_access_exception');
-OW::getEventManager()->bind('base.password_protected_exceptions', 'contactimporter_add_access_exception');
-OW::getEventManager()->bind('base.splash_screen_exceptions', 'contactimporter_add_access_exception');
-
-OW::getApplication()->addHttpsHandlerAttrs('CONTACTIMPORTER_CTRL_Facebook', 'canvas');
-
 
 /*$credits = new CONTACTIMPORTER_CLASS_Credits();
 OW::getEventManager()->bind('usercredits.on_action_collect', array($credits, 'bindCreditActionsCollect'));*/
