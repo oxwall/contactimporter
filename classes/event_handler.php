@@ -44,7 +44,6 @@ class CONTACTIMPORTER_CLASS_EventHandler
 
     public function __construct()
     {
-        $this->providers['facebook'] = new CONTACTIMPORTER_CLASS_FacebookProvider();
         $this->providers['google'] = new CONTACTIMPORTER_CLASS_GoogleProvider();
         $this->providers['email'] = new CONTACTIMPORTER_CLASS_EmailProvider();
     }

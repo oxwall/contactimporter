@@ -39,16 +39,6 @@ OW::getLanguage()->importPluginLangs(OW::getPluginManager()->getPlugin('contacti
 
 OW::getPluginManager()->addPluginSettingsRouteName('contactimporter', 'contactimporter_admin');
 
-if ( !OW::getConfig()->configExists('contactimporter', 'facebook_app_id') )
-{
-    OW::getConfig()->addConfig('contactimporter', 'facebook_app_id', '', '');
-}
-
-if ( !OW::getConfig()->configExists('contactimporter', 'facebook_app_secret') )
-{
-    OW::getConfig()->addConfig('contactimporter', 'facebook_app_secret', '', '');
-}
-
 if ( !OW::getConfig()->configExists('contactimporter', 'google_client_id') )
 {
     OW::getConfig()->addConfig('contactimporter', 'google_client_id', '');
